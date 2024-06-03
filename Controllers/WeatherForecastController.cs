@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using peliculasApi.Entidades.Repositorios;
 
 namespace peliculasApi.Controllers;
 
@@ -13,6 +14,7 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
+
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
@@ -21,6 +23,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

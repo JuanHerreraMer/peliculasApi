@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\JuanHM\\Cursos\\Udemy\\Felipe-Gavilan\\React17-ASP.NetCore5\\.Net\\peliculasApi\\peliculasApi.csproj": {}
+    "/home/juanhm/Documentos/workspace/Cursos/Felipe-Gavilan/React17-ASP.NetCore5/NetCore/peliculasApi/peliculasApi.csproj": {}
   },
   "projects": {
-    "D:\\JuanHM\\Cursos\\Udemy\\Felipe-Gavilan\\React17-ASP.NetCore5\\.Net\\peliculasApi\\peliculasApi.csproj": {
+    "/home/juanhm/Documentos/workspace/Cursos/Felipe-Gavilan/React17-ASP.NetCore5/NetCore/peliculasApi/peliculasApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JuanHM\\Cursos\\Udemy\\Felipe-Gavilan\\React17-ASP.NetCore5\\.Net\\peliculasApi\\peliculasApi.csproj",
+        "projectUniqueName": "/home/juanhm/Documentos/workspace/Cursos/Felipe-Gavilan/React17-ASP.NetCore5/NetCore/peliculasApi/peliculasApi.csproj",
         "projectName": "peliculasApi",
-        "projectPath": "D:\\JuanHM\\Cursos\\Udemy\\Felipe-Gavilan\\React17-ASP.NetCore5\\.Net\\peliculasApi\\peliculasApi.csproj",
-        "packagesPath": "C:\\Users\\juanh\\.nuget\\packages\\",
-        "outputPath": "D:\\JuanHM\\Cursos\\Udemy\\Felipe-Gavilan\\React17-ASP.NetCore5\\.Net\\peliculasApi\\obj\\",
+        "projectPath": "/home/juanhm/Documentos/workspace/Cursos/Felipe-Gavilan/React17-ASP.NetCore5/NetCore/peliculasApi/peliculasApi.csproj",
+        "packagesPath": "/home/juanhm/.nuget/packages/",
+        "outputPath": "/home/juanhm/Documentos/workspace/Cursos/Felipe-Gavilan/React17-ASP.NetCore5/NetCore/peliculasApi/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\juanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/juanhm/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -73,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
