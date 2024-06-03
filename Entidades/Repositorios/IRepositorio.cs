@@ -9,6 +9,6 @@ namespace peliculasApi.Entidades.Repositorios
     {
         List<Genero> ObtenerTodosLosGeneros();
 
-        Genero? ObtenerGeneroById(int id);
+        Task<Genero> ObtenerGeneroById(int id);
     }
 }
