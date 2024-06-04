@@ -1,4 +1,4 @@
-using peliculasApi.Entidades.Repositorios;
+using peliculasApi.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IRepositorio, RepositorioEnMemoria>();
+
 
 var app = builder.Build();
 

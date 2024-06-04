@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using peliculasApi.Entidades.Repositorios;
 
 namespace peliculasApi.Controllers;
 

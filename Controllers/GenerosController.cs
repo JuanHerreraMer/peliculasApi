@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using peliculasApi.Entidades;
-using peliculasApi.Entidades.Repositorios;
+using peliculasApi.Repositorios;
 
 namespace peliculasApi.Controllers
 {
@@ -14,15 +14,18 @@ namespace peliculasApi.Controllers
     public class GenerosController : ControllerBase
     {
         private readonly IRepositorio _repositorio;
+        private readonly ILogger<GenerosController> _logger;
 
-        public GenerosController(IRepositorio repositorio)
+        public GenerosController(IRepositorio repositorio, ILogger<GenerosController> logger)
         {
             _repositorio = repositorio;
+            _logger = logger;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Genero>> get()
         {
+            _logger.LogInformation("Vamos a mostrar los generos");
             return _repositorio.ObtenerTodosLosGeneros();
         }
 
@@ -30,7 +33,9 @@ namespace peliculasApi.Controllers
         public async Task<ActionResult<Genero>> get(int Id, [BindRequired] string nombre)
         {
 
-            if(!ModelState.IsValid)
+            _logger.LogDebug("Obteniendo un género por el ID");
+
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -39,6 +44,7 @@ namespace peliculasApi.Controllers
 
             if (genero == null)
             {
+                _logger.LogWarning($"No pudimos encontrar el género de id {Id}");
                 return NotFound();
             }
 
