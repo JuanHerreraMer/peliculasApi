@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using peliculasApi.Entidades;
-using peliculasApi.Repositorios;
 
 namespace peliculasApi.Controllers
 {
@@ -13,50 +12,42 @@ namespace peliculasApi.Controllers
     [Route("api/[controller]")]
     public class GenerosController : ControllerBase
     {
-        private readonly IRepositorio _repositorio;
         private readonly ILogger<GenerosController> _logger;
 
-        public GenerosController(IRepositorio repositorio, ILogger<GenerosController> logger)
+        public GenerosController(ILogger<GenerosController> logger)
         {
-            _repositorio = repositorio;
             _logger = logger;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Genero>> get()
+        public ActionResult<List<Genero>> Get()
         {
-            _logger.LogInformation("Vamos a mostrar los generos");
-            return _repositorio.ObtenerTodosLosGeneros();
+            return new List<Genero>() { new Genero() { Id = 1, Nombre = "Comedia" } };
         }
 
         [HttpGet("{Id:int}")]
-        public async Task<ActionResult<Genero>> get(int Id, [BindRequired] string nombre)
+        public ActionResult<Genero> Get(int Id)
         {
-
-            _logger.LogDebug("Obteniendo un género por el ID");
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var genero = await _repositorio.ObtenerGeneroById(Id);
-
-            if (genero == null)
-            {
-                _logger.LogWarning($"No pudimos encontrar el género de id {Id}");
-                return NotFound();
-            }
-
-            return genero;
-
+            throw new NotImplementedException();
         }
 
 
         [HttpPost]
         public ActionResult Post([FromBody] Genero genero)
         {
-            return NoContent();
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody] Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int Id)
+        {
+            throw new NotImplementedException();
         }
 
     }

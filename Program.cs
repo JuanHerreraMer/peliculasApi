@@ -1,4 +1,5 @@
-using peliculasApi.Repositorios;
+using Microsoft.EntityFrameworkCore;
+using peliculasApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IRepositorio, RepositorioEnMemoria>();
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    var frontendURL = builder.Configuration.GetValue<string>("frontend_url");
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -22,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
