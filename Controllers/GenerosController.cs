@@ -2,27 +2,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
+using peliculasApi.DTOs;
 using peliculasApi.Entidades;
 
 namespace peliculasApi.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class GenerosController : ControllerBase
     {
         private readonly ILogger<GenerosController> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GenerosController(ILogger<GenerosController> logger)
+        public GenerosController(ILogger<GenerosController> logger, ApplicationDbContext context, IMapper mapper)
         {
             _logger = logger;
+            _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<Genero>> Get()
+        public async Task<ActionResult<List<GeneroDTO>>> Get()
         {
-            return new List<Genero>() { new Genero() { Id = 1, Nombre = "Comedia" } };
+            var generos = await _context.Generos.ToListAsync();
+            return _mapper.Map<List<GeneroDTO>>(generos);
         }
 
         [HttpGet("{Id:int}")]
@@ -33,9 +41,12 @@ namespace peliculasApi.Controllers
 
 
         [HttpPost]
-        public ActionResult Post([FromBody] Genero genero)
+        public async Task<ActionResult> Post([FromBody] GeneroCreacionDTO generoCreacionDTO)
         {
-            throw new NotImplementedException();
+            var genero = _mapper.Map<Genero>(generoCreacionDTO);
+            _context.Add(genero);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpPut]

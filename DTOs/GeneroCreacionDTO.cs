@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
+﻿using peliculasApi.Validaciones;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using peliculasApi.Validaciones;
 
-namespace peliculasApi.Entidades
+namespace peliculasApi.DTOs
 {
-    public class Genero
+    public class GeneroCreacionDTO
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 50)]
         [PrimeraLetraMayuscula]
         public string Nombre { get; set; }
-
     }
 }
