@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using peliculasApi.DTOs;
 using peliculasApi.Entidades;
+using peliculasApi.Utilidades;
 
 namespace peliculasApi.Controllers
 {
@@ -27,16 +28,23 @@ namespace peliculasApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GeneroDTO>>> Get()
+        public async Task<ActionResult<List<GeneroDTO>>> Get([FromQuery] PaginacionDTO paginacionDTO)
         {
-            var generos = await _context.Generos.ToListAsync();
+            var queryable = _context.Generos.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var generos = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
             return _mapper.Map<List<GeneroDTO>>(generos);
+
         }
 
-        [HttpGet("{Id:int}")]
-        public ActionResult<Genero> Get(int Id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<GeneroDTO>> Get(int id)
         {
-            throw new NotImplementedException();
+            var genero = await _context.Generos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (genero == null) return NotFound();
+
+            return _mapper.Map<GeneroDTO>(genero);
         }
 
 
@@ -49,10 +57,17 @@ namespace peliculasApi.Controllers
             return NoContent();
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Genero genero)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] GeneroCreacionDTO generoCreacionDTO)
         {
-            throw new NotImplementedException();
+            var genero = await _context.Generos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (genero == null) return NotFound();
+
+            genero = _mapper.Map(generoCreacionDTO, genero);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         [HttpDelete]

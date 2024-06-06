@@ -10,7 +10,7 @@ namespace peliculasApi
         public MappingConfig()
         {
             CreateMap<Genero, GeneroDTO>().ReverseMap();
-            CreateMap<Genero, GeneroCreacionDTO>();
+            CreateMap<Genero, GeneroCreacionDTO>().ReverseMap();
         }
     }
 }

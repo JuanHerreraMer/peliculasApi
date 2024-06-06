@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers( options =>
+builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(ParsearBadRequests));
 }).ConfigureApiBehaviorOptions(BehaviorBadRequests.Parsear);
@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
     var frontendURL = builder.Configuration.GetValue<string>("frontend_url");
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader()
+        .WithExposedHeaders(new string[] { "cantidadTotalRegistros" });
     });
 });
 
