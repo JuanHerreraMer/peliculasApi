@@ -70,10 +70,16 @@ namespace peliculasApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult Delete(int Id)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var existe = await _context.Generos.AnyAsync(x => x.Id == id);
+            if (!existe) return NotFound();
+
+            _context.Remove(new Genero() { Id = id });
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
     }
